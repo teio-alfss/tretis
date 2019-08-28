@@ -1,34 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#define COLUNN 60
-#define ROWS   25
-
-//preenche a matrix espaços vazios
-void init(char matrix[ROWS][COLUNN] ){
-    int i, j;
-        for ( i = 0; i < ROWS; i++){
-            for ( j = 0; j < COLUNN; j++){
-                matrix[i][j] = ' ';
-            }
-            
-        }
-        
-
-
-}
-//imprimi a matrix jogo
-void printMatrix(char matrix[ROWS][COLUNN]){
-    int i, j;
-
-        for ( i = 0; i < ROWS; i++){
-            for ( j = 0; j < COLUNN; j++){
-                printf("%c", matrix[i][j]);
-            }
-            printf("\n");
-        }
-    
-}
+/*TEIO*/
+/*jogo interativo tetris
+para rodar no terminal 
+para executar start .\programa.exe
+Alifer da silva souza
+*/
+#include "tetris.h"
 
 int main (){
     
