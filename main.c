@@ -5,6 +5,7 @@ para executar start .\programa.exe
 Alifer da silva souza
 */
 #include "tetris.h"
+#include "display.h"
 
 int main (){
     
@@ -16,9 +17,14 @@ int main (){
     posj = COLUNN/2;
     init(matrix);
 
+        //apagar cursor da tela
+        ShowConsoleCursor(0);
+        system("cls");
         while (1){
-            system("cls");
+            gotoxy(0,0);
+
             matrix[posi][posj] = '@';
+
             printMatrix(matrix);
 
             matrix[posi][posj] = ' ';
