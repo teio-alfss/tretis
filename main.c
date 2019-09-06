@@ -13,7 +13,7 @@ int main (){
     char matrix[ROWS][COLUNN];
     
     // posicao inicial do avatar
-    posi = ROWS/2;
+    posi = 1;//ROWS/2;  //faz o '@' fica em cima do mapa===============
     posj = COLUNN/2;
     init(matrix);
 
@@ -29,7 +29,7 @@ int main (){
 
             matrix[posi][posj] = ' ';
 
-                if ( posj < COLUNN ) posj++; // colisao com a parede  
+                if ( posj < COLUNN ) posi++; //faz cair ate bate no chao=========  
         }
     
     system("pause");
