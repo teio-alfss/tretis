@@ -8,19 +8,24 @@ Alifer da silva souza
 #include "display.h"
 
 int main (){
-    
+   
+    int keypressed=0;
     int posi, posj;
     char matrix[ROWS][COLUNN];
     
     // posicao inicial do avatar
-    posi = 1;//ROWS/2;  //faz o '@' fica em cima do mapa===============
+    posi = 0;//ROWS/2;  //faz o '@' fica em cima do mapa===============
     posj = COLUNN/2;
     init(matrix);
 
         //apagar cursor da tela
         ShowConsoleCursor(0);
         system("cls");
-        while (1){
+        
+        //rotina principal jogo=============================
+        while (keypressed != ESC){
+
+
             gotoxy(0,0);
 
             matrix[posi][posj] = '@';
@@ -29,8 +34,27 @@ int main (){
 
             matrix[posi][posj] = ' ';
 
-                if ( posj < COLUNN ) posi++; //faz cair ate bate no chao=========  
-        }
+                if ( posi < (ROWS -2)) posi++; //faz cair ate bate no chao=========  
+        
+        
+        //lendo teclas--------------
+        keypressed = 0;
+        if(kbhit()) keypressed = getch();
+            if (keypressed == ARROWS) keypressed = getch();// para capturar setas=================
+    
+                switch(keypressed){
+                    case TECLA_AA:
+                    case TECLA_A:
+                    case LEFT: if(posj > 1) posj--; //move para esquerda--------------------------
+                        break; 
+
+                    case TECLA_DD:
+                    case TECLA_D:
+                    case RIGHT: if(posj < (COLUNN-2)) posj++; //move para direita------------------
+                        break;
+            }
+           
+}//fim while************************************
     
     system("pause");
 

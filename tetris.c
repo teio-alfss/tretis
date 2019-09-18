@@ -8,7 +8,7 @@ void init(char matrix[ROWS][COLUNN] ){
         for ( i = 0; i < ROWS; i++){
             for ( j = 0; j < COLUNN; j++){
               
-               if (i == 0 || i == 24 || j == 0 || j == 59){ matrix[i][j] = '*';} //cria paredes no mapa============
+               if (i == 0 || i == (ROWS - 1) || j == 0 || j == 59){ matrix[i][j] = '*';} //cria paredes no mapa============
               
                else 
                 matrix[i][j] = ' ';
