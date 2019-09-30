@@ -15,8 +15,8 @@ Alifer da silva souza
 #define ARROWS      224
 #define LEFT        75
 #define RIGHT       77
-#define TECLA_A     97
-#define TECLA_D     100
+#define TECLA_a     97
+#define TECLA_d     100
 #define TECLA_AA    65
 #define TECLA_DD    68
 

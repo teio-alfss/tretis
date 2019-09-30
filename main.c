@@ -44,12 +44,12 @@ int main (){
     
                 switch(keypressed){
                     case TECLA_AA:
-                    case TECLA_A:
+                    case TECLA_a:
                     case LEFT: if(posj > 1) posj--; //move para esquerda--------------------------
                         break; 
 
                     case TECLA_DD:
-                    case TECLA_D:
+                    case TECLA_d:
                     case RIGHT: if(posj < (COLUNN-2)) posj++; //move para direita------------------
                         break;
             }
