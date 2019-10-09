@@ -7,15 +7,23 @@ Alifer da silva souza
 #include "tetris.h"
 #include "display.h"
 
+#define DEBUG 0
+
 int main (){
    
     int keypressed=0;
-    int posi, posj;
     char matrix[ROWS][COLUNN];
+    Bloco tijolo;
     
     // posicao inicial do avatar
-    posi = 0;//ROWS/2;  //faz o '@' fica em cima do mapa===============
-    posj = COLUNN/2;
+    tijolo.i =          0;//ROWS/2;  //faz A PECA fica em cima do mapa===============
+    tijolo.j =          COLUNN/2;
+    tijolo.tipo =       TIPO_I;
+    tijolo.orientacao = ORIENTACAO_UP;
+    tijolo.width =      1;
+    tijolo.height =     4;
+
+
     init(matrix);
 
         //apagar cursor da tela
@@ -28,13 +36,33 @@ int main (){
 
             gotoxy(0,0);
 
-            matrix[posi][posj] = '@';
+            #if DEBUG == 1
+                printf("@ = (%d, %d)\n", posi, posj);
+            #endif
+            //desenha a peca
+            switch (tijolo.orientacao){
+                case ORIENTACAO_UP:
+                    if(tijolo.i-3 >= 0) matrix[tijolo.i-3][tijolo.j] = PiXEL;
+                    if(tijolo.i-2 >= 0) matrix[tijolo.i-2][tijolo.j] = PiXEL;
+                    if(tijolo.i-1 >= 0) matrix[tijolo.i-1][tijolo.j] = PiXEL;
+                    matrix[tijolo.i][tijolo.j] =   PiXEL;
+            break;
+                case ORIENTACAO_LEFT:
+                    //outro desenho barra de lado
+                    
+                break;
+            }
 
+            //IMPRIME
             printMatrix(matrix);
 
-            matrix[posi][posj] = ' ';
+            //APAGA A VERSAO ANTERIO DA TELA
+            if(tijolo.i-3 >=0) matrix[tijolo.i-3][tijolo.j] = EMPTY;
+            if(tijolo.i-2 >=0 )matrix[tijolo.i-2][tijolo.j] = EMPTY;
+            if(tijolo.i-1 >=0) matrix[tijolo.i-1][tijolo.j] = EMPTY;
+            matrix[tijolo.i][tijolo.j] =   EMPTY;
 
-                if ( posi < (ROWS -2)) posi++; //faz cair ate bate no chao=========  
+                if ( tijolo.i < (ROWS -2)) tijolo.i++; //faz cair ate bate no chao=========  
         
         
         //lendo teclas--------------
@@ -45,12 +73,12 @@ int main (){
                 switch(keypressed){
                     case TECLA_AA:
                     case TECLA_a:
-                    case LEFT: if(posj > 1) posj--; //move para esquerda--------------------------
+                    case LEFT: if(tijolo.j > 1) tijolo.j--; //move para esquerda--------------------------
                         break; 
 
                     case TECLA_DD:
                     case TECLA_d:
-                    case RIGHT: if(posj < (COLUNN-2)) posj++; //move para direita------------------
+                    case RIGHT: if(tijolo.j < (COLUNN-2)) tijolo.j++; //move para direita------------------
                         break;
             }
            
