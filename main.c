@@ -7,21 +7,20 @@ Alifer da silva souza
 #include "tetris.h"
 #include "display.h"
 
-#define DEBUG 0
+#define DEBUG 1
 
 int main (){
-   
-    int keypressed=0;
-    char matrix[ROWS][COLUNN];
+   char matrix[ROWS][COLUNN];   
     Bloco tijolo;
+    int keypressed=0;
     
     // posicao inicial do avatar
     tijolo.i =          0;//ROWS/2;  //faz A PECA fica em cima do mapa===============
     tijolo.j =          COLUNN/2;
     tijolo.tipo =       TIPO_I;
-    tijolo.orientacao = ORIENTACAO_UP;
-    tijolo.width =      1;
-    tijolo.height =     4;
+    tijolo.orientacao = ORIENTACAO_LEFT;
+    tijolo.width =      5;
+    tijolo.height =     1;
 
 
     init(matrix);
@@ -32,38 +31,25 @@ int main (){
         
         //rotina principal jogo=============================
         while (keypressed != ESC){
-
-
             gotoxy(0,0);
 
             #if DEBUG == 1
-                printf("@ = (%d, %d)\n", posi, posj);
+                printf("posicao = (%d,%d)\n",tijolo.i, tijolo.j);
+                printf("dimensao = (%d,%d)\n",tijolo.width, tijolo.height);
             #endif
-            //desenha a peca
-            switch (tijolo.orientacao){
-                case ORIENTACAO_UP:
-                    if(tijolo.i-3 >= 0) matrix[tijolo.i-3][tijolo.j] = PiXEL;
-                    if(tijolo.i-2 >= 0) matrix[tijolo.i-2][tijolo.j] = PiXEL;
-                    if(tijolo.i-1 >= 0) matrix[tijolo.i-1][tijolo.j] = PiXEL;
-                    matrix[tijolo.i][tijolo.j] =   PiXEL;
-            break;
-                case ORIENTACAO_LEFT:
-                    //outro desenho barra de lado
-                    
-                break;
-            }
+            
+            //coloca o @ no meio da tela
+            drawBar(matrix, tijolo, PiXEL);
 
-            //IMPRIME
+            //mostro a matrix na tela
             printMatrix(matrix);
 
-            //APAGA A VERSAO ANTERIO DA TELA
-            if(tijolo.i-3 >=0) matrix[tijolo.i-3][tijolo.j] = EMPTY;
-            if(tijolo.i-2 >=0 )matrix[tijolo.i-2][tijolo.j] = EMPTY;
-            if(tijolo.i-1 >=0) matrix[tijolo.i-1][tijolo.j] = EMPTY;
-            matrix[tijolo.i][tijolo.j] =   EMPTY;
+            //apaga a posicao anterior
+            drawBar(matrix, tijolo, EMPTY);
 
-                if ( tijolo.i < (ROWS -2)) tijolo.i++; //faz cair ate bate no chao=========  
-        
+            //para o @ ir para direita
+            if(tijolo.i < (ROWS-1)) tijolo.i++;
+   
         
         //lendo teclas--------------
         keypressed = 0;
@@ -80,6 +66,24 @@ int main (){
                     case TECLA_d:
                     case RIGHT: if(tijolo.j < (COLUNN-2)) tijolo.j++; //move para direita------------------
                         break;
+                    
+                    case TECLA_ESPACO:
+                    if(tijolo.orientacao == ORIENTACAO_RIGHT)
+                        tijolo.orientacao = ORIENTACAO_UP;
+                        else
+                        tijolo.orientacao++;
+
+                        //inverte as dimensoes do tijolo
+                        int aux = tijolo.width;
+                        tijolo.width = tijolo.height;
+                        tijolo.height = aux;
+
+                        //arrumando bug cantos
+                        if(tijolo.j < (tijolo.width/2))
+                        tijolo.j = tijolo.width/2;
+                        else if(tijolo.j > COLUNN - (tijolo.width/2) - 1 )
+                                tijolo.j = COLUNN - (tijolo.width/2) - 1;
+                        
             }
            
 }//fim while************************************

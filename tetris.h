@@ -27,6 +27,7 @@ Alifer da silva souza
 #define TECLA_d     100
 #define TECLA_AA    65
 #define TECLA_DD    68
+#define TECLA_ESPACO 32
 
 
 //Orientacao das pecas
@@ -57,6 +58,11 @@ typedef struct {
 }Bloco;
 
 
-
+//iniciar a matrix principal ddo jogo
 void init(char matrix[ROWS][COLUNN]);
+
+//imorimi a tela do jogo
 void printMatrix(char matrix[ROWS][COLUNN]);
+
+//desenha uma barra usando os simbolos
+void drawBar(char matrix[ROWS][COLUNN], Bloco barra, int simbolo);
