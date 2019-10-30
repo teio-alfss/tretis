@@ -8,7 +8,7 @@ void init(char matrix[ROWS][COLUNN] ){
         for ( i = 0; i < ROWS; i++){
             for ( j = 0; j < COLUNN; j++){
               
-               if (i == 0 || i == (ROWS - 1) || j == 0 || j == 59){ matrix[i][j] = '*';} //cria paredes no mapa============
+               if (i == 0 || i == (ROWS - 1) || j == 0 || j == (COLUNN -1)){ matrix[i][j] = '*';} //cria paredes no mapa============
               
                else 
                 matrix[i][j] = ' ';
@@ -54,4 +54,50 @@ void drawBar(char matrix[ROWS][COLUNN], Bloco barra, int simbolo){
                 matrix[barra.i][barra.j] = simbolo;
                 break;
     }
+}
+
+
+//===============================================
+void initBar(Bloco *barra){
+    
+// posicao inicial do avatar
+    barra->i =          0;//ROWS/2;  //faz A PECA fica em cima do mapa===============
+    barra->j =          COLUNN/2;
+    barra->tipo =       TIPO_I;
+    barra->orientacao = ORIENTACAO_LEFT;
+    barra->width =      5;
+    barra->height =     1;
+
+}
+
+// rotacao da peca
+void rotate(Bloco *bloco){
+    if(bloco->orientacao == ORIENTACAO_RIGHT)
+        bloco->orientacao = ORIENTACAO_UP;
+    else
+        bloco->orientacao++;
+                                
+        //inverte as dimensoes do tijolo
+        int aux = bloco->width;
+        bloco->width = bloco->height;
+        bloco->height = aux;
+
+        //arrumando bug cantos
+        if(bloco->j < (bloco->width/2))
+            bloco->j = bloco->width/2;
+        else if(bloco->j > COLUNN - (bloco->width/2) - 1)
+            bloco->j = COLUNN - (bloco->width/2) - 1;
+}
+
+
+//colisao das pecas
+int collisionDetect(char matrix[ROWS][COLUNN], Bloco barra){
+    int retorno = 1;
+
+    //colisao da barra
+    if((barra.i + barra.height/2) >= (ROWS-1))
+        retorno = 1;
+
+        return retorno;
+    
 }

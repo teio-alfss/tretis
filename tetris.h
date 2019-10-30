@@ -17,16 +17,16 @@ Alifer da silva souza
 
 
 
-#define COLUNN      60
-#define ROWS        25
-#define ESC         27
-#define ARROWS      224
-#define LEFT        75
-#define RIGHT       77
-#define TECLA_a     97
-#define TECLA_d     100
-#define TECLA_AA    65
-#define TECLA_DD    68
+#define COLUNN       30
+#define ROWS         40
+#define ESC          27
+#define ARROWS       224
+#define LEFT         75
+#define RIGHT        77
+#define TECLA_a      97
+#define TECLA_d      100
+#define TECLA_AA     65
+#define TECLA_DD     68
 #define TECLA_ESPACO 32
 
 
@@ -66,3 +66,12 @@ void printMatrix(char matrix[ROWS][COLUNN]);
 
 //desenha uma barra usando os simbolos
 void drawBar(char matrix[ROWS][COLUNN], Bloco barra, int simbolo);
+
+//inicializa a peca tipo barra
+void initBar(Bloco *barra);
+
+// rotacao da peca
+void rotate(Bloco *Bloco);
+
+////verifica colicao
+int collisionDetect(char matrix[ROWS][COLUNN], Bloco barra);

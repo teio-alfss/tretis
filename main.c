@@ -10,24 +10,19 @@ Alifer da silva souza
 #define DEBUG 1
 
 int main (){
-   char matrix[ROWS][COLUNN];   
+    char matrix[ROWS][COLUNN];   
     Bloco tijolo;
     int keypressed=0;
     
-    // posicao inicial do avatar
-    tijolo.i =          0;//ROWS/2;  //faz A PECA fica em cima do mapa===============
-    tijolo.j =          COLUNN/2;
-    tijolo.tipo =       TIPO_I;
-    tijolo.orientacao = ORIENTACAO_LEFT;
-    tijolo.width =      5;
-    tijolo.height =     1;
-
+    //apagar cursor da tela
+        ShowConsoleCursor(0);
+        system("cls");
+   
+    initBar(&tijolo);
 
     init(matrix);
 
-        //apagar cursor da tela
-        ShowConsoleCursor(0);
-        system("cls");
+        
         
         //rotina principal jogo=============================
         while (keypressed != ESC){
@@ -45,44 +40,36 @@ int main (){
             printMatrix(matrix);
 
             //apaga a posicao anterior
-            drawBar(matrix, tijolo, EMPTY);
+            if(!collisionDetect(matrix, tijolo)) {
+                drawBar(matrix, tijolo, EMPTY);
+            
+                //para o @ ir para direita
+                if(tijolo.i < (ROWS-1) ) tijolo.i++;
+            
+            }else{
+                initBar(&tijolo);
+            }
 
-            //para o @ ir para direita
-            if(tijolo.i < (ROWS-1)) tijolo.i++;
-   
-        
         //lendo teclas--------------
         keypressed = 0;
         if(kbhit()) keypressed = getch();
             if (keypressed == ARROWS) keypressed = getch();// para capturar setas=================
     
                 switch(keypressed){
-                    case TECLA_AA:
-                    case TECLA_a:
-                    case LEFT: if(tijolo.j > 1) tijolo.j--; //move para esquerda--------------------------
+                    case (int) 'a':
+                    case (int) 'A': 
+                    case LEFT: if((tijolo.j - (tijolo.width/2)) > 0) tijolo.j--; //move para esquerda--------------------------
                         break; 
 
                     case TECLA_DD:
                     case TECLA_d:
-                    case RIGHT: if(tijolo.j < (COLUNN-2)) tijolo.j++; //move para direita------------------
+                    case RIGHT: if((tijolo.j + (tijolo.width/2)) < (COLUNN-1)) tijolo.j++;  //move para direita------------------
                         break;
                     
                     case TECLA_ESPACO:
-                    if(tijolo.orientacao == ORIENTACAO_RIGHT)
-                        tijolo.orientacao = ORIENTACAO_UP;
-                        else
-                        tijolo.orientacao++;
-
-                        //inverte as dimensoes do tijolo
-                        int aux = tijolo.width;
-                        tijolo.width = tijolo.height;
-                        tijolo.height = aux;
-
-                        //arrumando bug cantos
-                        if(tijolo.j < (tijolo.width/2))
-                        tijolo.j = tijolo.width/2;
-                        else if(tijolo.j > COLUNN - (tijolo.width/2) - 1 )
-                                tijolo.j = COLUNN - (tijolo.width/2) - 1;
+                        rotate(&tijolo);
+                        break;
+                    
                         
             }
            
