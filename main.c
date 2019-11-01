@@ -2,7 +2,7 @@
 /*jogo interativo tetris
 para rodar no terminal 
 para executar start .\programa.exe
-Alifer da silva souza
+***Alifer da silva souza***
 */
 #include "tetris.h"
 #include "display.h"
@@ -41,8 +41,9 @@ int main (){
 
             //apaga a posicao anterior
             if(!collisionDetect(matrix, tijolo)) {
+               
                 drawBar(matrix, tijolo, EMPTY);
-            
+                          
                 //para o @ ir para direita
                 if(tijolo.i < (ROWS-1) ) tijolo.i++;
             
@@ -50,7 +51,7 @@ int main (){
                 initBar(&tijolo);
             }
 
-        //lendo teclas--------------
+        //lendo teclas-------------------------------------------------------------------------------------------------------
         keypressed = 0;
         if(kbhit()) keypressed = getch();
             if (keypressed == ARROWS) keypressed = getch();// para capturar setas=================

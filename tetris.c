@@ -5,10 +5,10 @@
 //preenche a matrix espaços vazios================================
 void init(char matrix[ROWS][COLUNN] ){
     int i, j;
-        for ( i = 0; i < ROWS; i++){
-            for ( j = 0; j < COLUNN; j++){
+        for ( i = 0; i <= ROWS; i++){
+            for ( j = 0; j <= COLUNN; j++){
               
-               if (i == 0 || i == (ROWS - 1) || j == 0 || j == (COLUNN -1)){ matrix[i][j] = '*';} //cria paredes no mapa============
+               if (i == 0 || i == (ROWS) || j == 0 || j == (COLUNN)){ matrix[i][j] = '*';} //cria paredes no mapa============
               
                else 
                 matrix[i][j] = ' ';
@@ -23,8 +23,8 @@ void init(char matrix[ROWS][COLUNN] ){
 void printMatrix(char matrix[ROWS][COLUNN]){
     int i, j;
 
-        for ( i = 0; i < ROWS; i++){
-            for ( j = 0; j < COLUNN; j++){
+        for ( i = 0; i <= ROWS; i++){
+            for ( j = 0; j <= COLUNN; j++){
                 printf("%c", matrix[i][j]);
             }
             printf("\n");
@@ -92,12 +92,11 @@ void rotate(Bloco *bloco){
 
 //colisao das pecas
 int collisionDetect(char matrix[ROWS][COLUNN], Bloco barra){
-    int retorno = 1;
+    int retorno = 0;
 
     //colisao da barra
-    if((barra.i + barra.height/2) >= (ROWS-1))
+    if((barra.i + barra.height/2) >= (ROWS -1))
         retorno = 1;
 
         return retorno;
-    
-}
+    }
