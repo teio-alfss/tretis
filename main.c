@@ -59,12 +59,14 @@ int main (){
                 switch(keypressed){
                     case (int) 'a':
                     case (int) 'A': 
-                    case LEFT: if((tijolo.j - (tijolo.width/2)) > 0) tijolo.j--; //move para esquerda--------------------------
+                    case LEFT: if((tijolo.j - (tijolo.width/2)) > 0)
+                                if(matrix[tijolo.i][tijolo.j - (tijolo.width/2) - 1] == EMPTY) tijolo.j--; //move para esquerda--------------------------
                         break; 
 
                     case TECLA_DD:
                     case TECLA_d:
-                    case RIGHT: if((tijolo.j + (tijolo.width/2)) < (COLUNN-1)) tijolo.j++;  //move para direita------------------
+                    case RIGHT: if((tijolo.j + (tijolo.width/2)) < (COLUNN-2))
+                                if(matrix[tijolo.i][tijolo.j + (tijolo.width/2) + 1] == EMPTY) tijolo.j++;  //move para direita------------------
                         break;
                     
                     case TECLA_ESPACO:

@@ -18,7 +18,7 @@ Alifer da silva souza
 
 
 #define COLUNN       30
-#define ROWS         40
+#define ROWS         60
 #define ESC          27
 #define ARROWS       224
 #define LEFT         75
