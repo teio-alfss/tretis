@@ -14,11 +14,13 @@ Alifer da silva souza
 #define PiXEL 219
 #define EMPTY 32
 
-
+#define CHECK_SIDE   1
+#define UNCHECK_SIDE 0
+#define NOME         0
 
 
 #define COLUNN       30
-#define ROWS         60
+#define ROWS         50
 #define ESC          27
 #define ARROWS       224
 #define LEFT         75
@@ -75,3 +77,5 @@ void rotate(Bloco *Bloco);
 
 ////verifica colicao
 int collisionDetect(char matrix[ROWS][COLUNN], Bloco barra);
+
+int collisionBar(char matrix[ROWS][COLUNN], Bloco barra, int collideSides, int side);

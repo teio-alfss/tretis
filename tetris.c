@@ -95,12 +95,12 @@ int collisionDetect(char matrix[ROWS][COLUNN], Bloco barra){
     int retorno = 0;
 
     //colisão com a base
-    if((barra.i + 1) >= ROWS)
+    if((barra.i + barra.height/2) >= (ROWS - 1))
         retorno = 1;
 
     //colisão entre peças
-    
-    if(matrix[barra.i + 1][barra.j] != EMPTY)
+    int t1 = barra.height/2;
+    if(matrix[barra.i + t1 + 1][barra.j] != EMPTY)
         retorno = 1;
 
     int t2 = barra.width / 2;
@@ -109,5 +109,35 @@ int collisionDetect(char matrix[ROWS][COLUNN], Bloco barra){
     if(matrix[barra.i+1][barra.j - t2] != EMPTY )
         retorno = 1;
 
+    return retorno;
+}
+
+//===========================================
+int collisionBar(char matrix[ROWS][COLUNN], Bloco barra, int collideSides, int side){
+    int retorno = 0;
+
+    if((barra.i + 1) >= ROWS) retorno = 1;
+
+    //colisão entre peças
+    int t1 = barra.height/2;
+    if(matrix[barra.i + t1 + 1][barra.j] != EMPTY)
+        retorno = 1;
+
+    int t2 = barra.width / 2;
+    if(matrix[barra.i+1][barra.j + t2] != EMPTY )
+        retorno = 1;
+    if(matrix[barra.i+1][barra.j - t2] != EMPTY )
+        retorno = 1;
+
+    //colisao lateral horinzontal
+    if(collideSides == 1){
+        
+        if(side == RIGHT && matrix[barra.i][barra.j + t2 + 1] != EMPTY)
+            retorno = 1;
+        if(side == LEFT && barra.j + t2 + 1 >= COLUNN)
+            retorno = 1;
+        if(barra.j - t2 - 1 < 0)
+            retorno = 1;
+    }
     return retorno;
 }
